@@ -162,6 +162,7 @@ if os.environ.get('AWS_ACCESS_KEY_ID')=='GXXK4C5UTOANAOIAJR63':
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 else:
+    from .cdn.conf import * # noqa
     STATIC_URL = '/static/'
 
     STATICFILES_DIRS = [
@@ -176,7 +177,7 @@ else:
     #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
     #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-    from .cdn.conf import * # noqa
+    
 
     # Extra places for collectstatic to find static files.
     #STATICFILES_DIRS = (
