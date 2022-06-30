@@ -33,7 +33,10 @@ def graficos(request):
     joined_df['id_y'] = joined_df['id_y'].astype('Int64')
     joined_df = joined_df.rename(columns={'id_x':'id_plan','id_y':'id_realiza'})
     joined_df1 = joined_df.drop(columns=['cod_kepler_prov','orden_compra','notas_plan','notas_real','plan_mant_id'])
-    df_mants = joined_df1.to_html()
+    df = pd.DataFrame(columns=labels)
+    diccionario = {'no_realizados':no_realizados.count()[0],'a_tiempo':df_en_fecha.count()[0],'realizados_fuera':df_fuera.count()[0]}
+    df = df.append(diccionario,ignore_index=True)
+    df_mants = df.to_html()
 
     '''
     if settings.DEBUG:
