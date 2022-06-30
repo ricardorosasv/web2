@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Reporte Mantenimientos
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+{% include 'sidenav_mant.html' %}
+
+<h1 class="title">Reporte Mantenimientos  <button type="button" style="float: right;" onclick="location.href='{% url 'crear_mant' %}'">Crear Mantenimiento</button></h1>
+<br>
+<div class='cabecera'>
+    <form action='' >
+        
+        {{ form.as_p }}
+    
+        <input type='submit' value='Mostrar' />
+    
+    </form>
+</div>
+
+{% for area in areas %}
+<h2> {{area}} </h2>
+    {% for maquina in maquinas %}
+        {% if maquina.modelo.tipo.area == area %}
+            <h3> {{maquina}} </h3>
+            <table>
+                <tr>
+                    <th> Maquina </th>
+                    <th> Nombre </th>
+                    <th> Tipo </th>
+                    <th> Periodo </th>
+                    <th> Tareas </th>
+                    <th> Planifica </th>
+                </tr>
+            {% for mant in mants%}
+                {% if mant.maquina == maquina %}
+                <tr>
+                    <td> {{mant.maquina}} </td>
+                    <td> {{mant.nombre_mant}} </td>
+                    <td> {{mant.tipo}} </td> 
+                    <td> {{mant.periodo}} </td>
+                    <td> <button type="button" onclick="location.href='{% url 'repxtareas' mant.id%}'">Ver Tareas</button> </td>
+                    <td> <button type="button" onclick="location.href='{% url 'alta_plan_mant_2' mant.id%}'">Programar</button> </td>     
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </table>
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+{% endblock %}
