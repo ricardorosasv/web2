@@ -28,7 +28,11 @@ def consulta_maquina(request,maquina):
 
 def rep_maquinas(request):
     maquinas = Maquina.objects.all()
-    areas = Area.objects.all()
+    lista_areas = []
+    for maquina in maquinas:
+        area = maquina.modelo.tipo.area.id
+        lista_areas.append(area)
+    areas = Area.objects.filter(id__in=lista_areas)
 
     return render(request, 'Catalogos/Maquina/rep_maquinas.html', {
         'maquinas':maquinas,
