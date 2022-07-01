@@ -152,6 +152,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
+'''
 if os.environ.get('AWS_ACCESS_KEY_ID')=='GXXK4C5UTOANAOIAJR63':
     STATIC_URL = '/static/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -162,27 +163,27 @@ if os.environ.get('AWS_ACCESS_KEY_ID')=='GXXK4C5UTOANAOIAJR63':
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 else:
-    from .cdn.conf import * # noqa
-    STATIC_URL = '/static/'
+'''    
+STATIC_URL = '/static/'
 
-    STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'static'),
-    ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # in production, we want cdn
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # in production, we want cdn
 
 
+MEDIA_URL = 'https://tpm-webapp-space.sfo3.digitaloceanspaces.com/media/'
+from .cdn.conf import * # noqa
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-    MEDIA_URL = 'https://tpm-webapp-space.sfo3.digitaloceanspaces.com/media/'
-    #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-    #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-    
 
-    # Extra places for collectstatic to find static files.
-    #STATICFILES_DIRS = (
-    #    os.path.join(BASE_DIR, 'static'),
-    #)
+# Extra places for collectstatic to find static files.
+#STATICFILES_DIRS = (
+#    os.path.join(BASE_DIR, 'static'),
+#)
 
 
 

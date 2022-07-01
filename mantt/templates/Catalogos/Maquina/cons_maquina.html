@@ -15,10 +15,12 @@ Maquina {{ maquina }}
 <h2> <img src="{{ult_estatus.estatus.img_estatus.url}}" /> {{maquina}}  </h2>
 <br>
 <table>
+    {% if maquina.imagen.url != ''%}
     <tr>
         <th> Imagen </th>
         <td> <img src="{{maquina.imagen.url}}" width="450" height="400" /> </td>
     </tr>
+    {% endif %}
     <tr>
         <th> Maquina </th>
         <td> {{maquina}} </td>
