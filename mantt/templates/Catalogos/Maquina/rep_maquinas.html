@@ -17,14 +17,17 @@ Maquinas
 <table class='table_cons_mod_del'>
     <tr>
         <th> Maquina </th>
-        <th> Modifica </th>
-        <th> Elimina </th>
+        <th> Modelo </th>
+        <th> Tipo </th>
+        <th> Area </th>        
     </tr>
     {% for maquina in maquinas %}
         {% if maquina.modelo.tipo.area == area%}
-            <tr><td> <a href="{% url 'maquina' maquina.id %}"> {{ maquina }}</a> </td>
-                <td> <button class="edita" type="button" onclick="location.href='{% url 'maquina' maquina.id%}'">Modifica</button> </td>
-                <td> <button class="elimina" type="button" onclick="location.href='{% url 'maquina' maquina.id%}'">Elimina</button> </td>
+            <tr>
+                <td> <a href="{% url 'maquina' maquina.id %}"> {{ maquina }}</a> </td>
+                <td>  {{ maquina.modelo }} </td>
+                <td>  {{ maquina.modelo.tipo }} </td>
+                <td>  {{ maquina.modelo.tipo.area }} </td>
             
             </tr>
 
