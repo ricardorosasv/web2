@@ -9,19 +9,23 @@ import datetime
 
 class Area(models.Model):
     nombre_area =  models.CharField(max_length=50, blank=False, verbose_name='Nombre Area',unique=True)
-
+    class Meta:
+        ordering = ['nombre_area']
     def __str__(self):
         return '{}'.format(self.nombre_area)
 
 class Tipo_maquina(models.Model):
     nombre_tipo =  models.CharField(max_length=50, blank=False, verbose_name='Tipo maquina',unique=True)
-    area = models.ForeignKey(Area, on_delete=DO_NOTHING) 
+    area = models.ForeignKey(Area, on_delete=DO_NOTHING)
+    class Meta:
+        ordering = ['nombre_tipo']
     def __str__(self):
         return '{}'.format(self.nombre_tipo)
 
 class Marca(models.Model):
     marca =  models.CharField(max_length=50, blank=False, verbose_name='Marca',unique=True)
-
+    class Meta:
+        ordering = ['marca']
     def __str__(self):
         return '{}'.format(self.marca)
 
@@ -31,6 +35,7 @@ class Modelo(models.Model):
     marca = models.ForeignKey(Marca, on_delete=DO_NOTHING)
     class Meta:
         constraints = [models.UniqueConstraint(fields=['nombre_modelo','tipo','marca'], name='Cons_Modelo')]
+        ordering = ['nombre_modelo']
     def __str__(self):
         return '{}'.format(self.nombre_modelo)   
 
@@ -40,9 +45,11 @@ class Maquina(models.Model):
     no_serie = models.CharField(max_length=100)
     codigo_kepler = models.CharField(max_length=100)
     imagen = models.ImageField(blank=True,upload_to='maquina_master')
+    class Meta:
+        ordering = ['nombre_maquina']
 
     def __str__(self):
-        return '{}'.format(self.nombre_maquina)
+        return '{} - {}'.format(self.nombre_maquina,self.modelo)
 
 class Sistema_maquina(models.Model):
     nombre_sistema = models.CharField(max_length=100, blank=False)
